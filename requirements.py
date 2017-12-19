@@ -6,13 +6,13 @@ from collections import OrderedDict
 
 requirements = OrderedDict([
 	('concurrent','Concurrent action execution'),
-	('nondet-outcomes','Non-deterministic action outcomes'),
+	('nondet-outcomes','Nondeterministic action outcomes'),
 	('partial-obs','Partial observability'),
-	('lim-com','Limited or no communication'),
+	('lim-com','Limited or non-existing communication infrastructure'),
 	('temporal','Temporal constraints'),
-	('continuous','Continuous variables'),
-	('linear','Linear time-varying variables'),
-	('nonlinear','Nonlinear time-varying variables'),
+	('continuous','Continuous fluents'),
+	('linear','Linear time-varying fluents'),
+	('nonlinear','Nonlinear time-varying fluents'),
 	('none','None of the above'),
 ])
 
@@ -36,7 +36,7 @@ def get_planner_based_table(requirements,key_oriented):
 	table += '\multirow{2}{*}{\\textbf{Planner}} & \multicolumn{%d}{c V{3}}{\\textbf{Features}} \\\\ \Cline{1pt}{2-%d}\n' % (nrows-1,nrows)
 	table += '& '+reqs+' \\\\ \hline \Cline{1pt}{1-%d}\n' % nrows
 	for p in reversed(sorted(key_oriented.keys())):
-		table += '\cite{'+ ','.join(key_oriented[p]) +'} & '
+		table += '\cite{'+ ','.join(sorted(list(key_oriented[p]))) +'} & '
 		req = []
 		for r in p:
 			if r:
@@ -86,3 +86,4 @@ for b in bib:
 
 with open(file_dir+'/table.tex','w') as f:
 	f.write(get_planner_based_table(requirements,key_oriented))
+
